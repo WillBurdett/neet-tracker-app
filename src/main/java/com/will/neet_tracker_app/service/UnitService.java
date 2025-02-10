@@ -1,9 +1,8 @@
 package com.will.neet_tracker_app.service;
 
-import com.will.neet_tracker_app.model.api.SubmissionRequest;
-import com.will.neet_tracker_app.model.db.SubmissionEntity;
 import com.will.neet_tracker_app.model.db.UnitEntity;
 import com.will.neet_tracker_app.repository.UnitRepo;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +21,12 @@ public class UnitService {
     return unitRepo.findAll();
   }
 
-  public UnitEntity updateLastRevised(SubmissionRequest submissionRequest) {
+  public UnitEntity updateLastRevised(Long unitId) {
     // check unit exists (could be a constraint on min/max of unitId int if we're controlling unit ids)
-    Optional<UnitEntity> optionalUnit = unitRepo.findById(submissionRequest.getUnitId());
+    Optional<UnitEntity> optionalUnit = unitRepo.findById(unitId);
     if (optionalUnit.isPresent()) {
       UnitEntity unitEntity = optionalUnit.get();
-      unitEntity.setLastRevised(submissionRequest.getDate());
+      unitEntity.setLastRevised(LocalDate.now());
       unitRepo.save(unitEntity);
       return unitEntity;
     } else {
