@@ -1,6 +1,5 @@
 package com.will.neet_tracker_app.controller;
 
-import com.will.neet_tracker_app.model.api.SubmissionRequest;
 import com.will.neet_tracker_app.model.db.ProblemEntity;
 import com.will.neet_tracker_app.model.db.SubmissionEntity;
 import com.will.neet_tracker_app.model.db.UnitEntity;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
