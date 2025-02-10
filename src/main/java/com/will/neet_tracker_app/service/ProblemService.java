@@ -1,6 +1,6 @@
 package com.will.neet_tracker_app.service;
 
-import com.will.neet_tracker_app.model.Problem;
+import com.will.neet_tracker_app.model.db.ProblemEntity;
 import com.will.neet_tracker_app.repository.ProblemRepo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class ProblemService {
     this.problemRepo = problemRepo;
   }
 
-  public List<Problem> getProblems() {
+  public List<ProblemEntity> getProblems() {
     return problemRepo.findAll();
   }
 }

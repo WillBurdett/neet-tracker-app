@@ -1,7 +1,7 @@
 package com.will.neet_tracker_app.controller;
 
 
-import com.will.neet_tracker_app.model.Unit;
+import com.will.neet_tracker_app.model.db.UnitEntity;
 import com.will.neet_tracker_app.service.UnitService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/neet")
+@RequestMapping("/neet/unit")
 public class UnitController {
 
   private UnitService unitService;
@@ -19,8 +19,8 @@ public class UnitController {
     this.unitService = unitService;
   }
 
-  @GetMapping("/unit")
-  public List<Unit> getUnits(){
+  @GetMapping
+  public List<UnitEntity> getUnits(){
     return unitService.getUnits();
   }
 

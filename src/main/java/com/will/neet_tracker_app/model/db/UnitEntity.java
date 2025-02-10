@@ -1,4 +1,4 @@
-package com.will.neet_tracker_app.model;
+package com.will.neet_tracker_app.model.db;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
@@ -19,7 +19,7 @@ import lombok.ToString;
 @Data
 @Entity
 @Table(name = "units")
-public class Unit {
+public class UnitEntity {
 
   @Id
   @Column(name = "unit_id")
@@ -34,11 +34,11 @@ public class Unit {
   @JsonIgnore
   @ToString.Exclude
   @OneToMany(mappedBy = "problemId", cascade = CascadeType.ALL)
-  private List<Problem> problems;
+  private List<ProblemEntity> problemEntities;
 
   @JsonIgnore
   @ToString.Exclude
   @OneToMany(mappedBy = "submissionId", cascade = CascadeType.ALL)
-  private List<Submission> submissions;
+  private List<SubmissionEntity> submissionEntities;
 }
 

@@ -1,6 +1,8 @@
 package com.will.neet_tracker_app.service;
 
-import com.will.neet_tracker_app.model.Submission;
+import com.will.neet_tracker_app.model.api.SubmissionRequest;
+import com.will.neet_tracker_app.model.db.SubmissionEntity;
+import com.will.neet_tracker_app.model.db.UnitEntity;
 import com.will.neet_tracker_app.repository.SubmissionRepo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,16 @@ public class SubmissionService {
     this.submissionRepo = submissionRepo;
   }
 
-  public List<Submission> getSubmissions() {
+  public List<SubmissionEntity> getSubmissions() {
     return submissionRepo.findAll();
+  }
+
+  public void createSubmission(SubmissionRequest submissionRequest,
+      UnitEntity unitEntity) {
+    SubmissionEntity submissionEntity = new SubmissionEntity();
+    submissionEntity.setUnitEntity(unitEntity);
+    submissionEntity.setTimeTaken(submissionRequest.getTimeTaken());
+    submissionEntity.setDate(submissionRequest.getDate());
+    submissionRepo.save(submissionEntity);
   }
 }

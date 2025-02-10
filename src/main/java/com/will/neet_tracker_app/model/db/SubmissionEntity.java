@@ -1,4 +1,4 @@
-package com.will.neet_tracker_app.model;
+package com.will.neet_tracker_app.model.db;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "submissions")
-public class Submission {
+public class SubmissionEntity {
 
   @Id
   @Column(name = "submission_id")
@@ -27,7 +27,7 @@ public class Submission {
 
   @ManyToOne
   @JoinColumn(name = "unit_id", nullable = false)
-  private Unit unit;
+  private UnitEntity unitEntity;
 
   @Column(name = "time_taken")
   private Long timeTaken;
