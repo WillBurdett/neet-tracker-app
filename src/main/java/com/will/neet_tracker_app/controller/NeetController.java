@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -39,8 +40,13 @@ public class NeetController {
     return submissionService.getSubmissions();
   }
 
-  @PostMapping("/submission/{unitId}/{timeTaken}")
-  public void createSubmission(@PathVariable Long unitId,  @PathVariable Long timeTaken) {
+  @GetMapping("/submission/{unitId}")
+  public List<SubmissionEntity> getSubmissionsByUnit(@PathVariable Long unitId) {
+    return submissionService.getSubmissionsByUnit(unitId);
+  }
+
+  @PostMapping("/submission")
+  public void createSubmission(@RequestParam Long unitId,  @RequestParam Long timeTaken) {
     UnitEntity updatedUnitEntity = unitService.updateLastRevised(unitId);
     submissionService.createSubmission(timeTaken, updatedUnitEntity);
   }
