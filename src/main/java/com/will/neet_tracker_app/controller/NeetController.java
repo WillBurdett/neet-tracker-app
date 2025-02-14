@@ -9,7 +9,6 @@ import com.will.neet_tracker_app.service.SubmissionService;
 import com.will.neet_tracker_app.service.UnitService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DurationFormat.Unit;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/neet")
@@ -51,6 +49,17 @@ public class NeetController {
     return submissionService.getSubmissions();
   }
 
+  @GetMapping("/submission/leaderboard/{unitId}")
+  public String getUnitLeaderboardL(Model model, @PathVariable Long unitId) {
+    UnitEntity unit = unitService.getUnitById(unitId);
+    List<SubmissionEntity> submissions = submissionService.getSubmissionsByUnit(unitId);
+    model.addAttribute("unitId", unit.getUnitId());
+    model.addAttribute("unitName", unit.getUnitName());
+    model.addAttribute("submissions", submissions);
+
+    return "leaderboard";
+  }
+
   @GetMapping("/submission/{unitId}")
   public String getSubmissionsForm(Model model, @PathVariable Long unitId) {
     UnitEntity unit = unitService.getUnitById(unitId);
@@ -65,7 +74,7 @@ public class NeetController {
   public String createSubmission(@ModelAttribute("submissionForm") SubmissionForm submissionForm) {
     UnitEntity updatedUnitEntity = unitService.updateLastRevised(submissionForm.getUnitId());
     submissionService.createSubmission(submissionForm, updatedUnitEntity);
-    return "redirect:/neet";
+    return "redirect:/neet/submission/leaderboard/" + submissionForm.getUnitId();
   }
 
   @GetMapping("/unit")
