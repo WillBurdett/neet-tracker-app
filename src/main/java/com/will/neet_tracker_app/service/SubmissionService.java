@@ -1,5 +1,6 @@
 package com.will.neet_tracker_app.service;
 
+import com.will.neet_tracker_app.model.api.SubmissionForm;
 import com.will.neet_tracker_app.model.db.SubmissionEntity;
 import com.will.neet_tracker_app.model.db.UnitEntity;
 import com.will.neet_tracker_app.repository.SubmissionRepo;
@@ -22,8 +23,10 @@ public class SubmissionService {
     return submissionRepo.findAll();
   }
 
-  public void createSubmission(Long timeTaken,
+  public void createSubmission(SubmissionForm submissionForm,
       UnitEntity unitEntity) {
+
+    Long timeTaken = submissionForm.getSeconds() + (submissionForm.getMinutes() * 60);
     SubmissionEntity submissionEntity = new SubmissionEntity();
     submissionEntity.setUnitEntity(unitEntity);
     submissionEntity.setTimeTaken(timeTaken);

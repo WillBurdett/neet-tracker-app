@@ -1,0 +1,45 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Neet Tracker App</title>-->
+<!--  <link rel="stylesheet"-->
+<!--        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"-->
+<!--        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"-->
+<!--        crossorigin="anonymous">-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container my-2">-->
+<!--  <h1>Neet Tracker App</h1>-->
+
+<!--  <hr>-->
+<!--  <h2> [[${unit.unitName}]] </h2>-->
+
+<!--  <table border="1" class="table table-striped table-responsive-md">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th>-->
+<!--        Rank-->
+<!--      </th>-->
+<!--      <th>-->
+<!--        Time Taken-->
+<!--      </th>-->
+<!--      <th>-->
+<!--        Date Submitted-->
+<!--      </th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="unit : ${units}">-->
+<!--      <td>-->
+<!--        <a th:href="@{neet/submission/{id}(id=${unit.unitId})}">[[${unit.unitName}]]</a>-->
+<!--      </td>-->
+<!--      <td th:text="${unit.lastRevised}"></td>-->
+<!--      <td th:text="${unit.lastRevised}"></td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

@@ -11,6 +11,28 @@
 <body>
     <div class="container my-2">
         <h1>Neet Tracker App</h1>
+
+      <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+          <th>
+              Unit Name
+          </th>
+          <th>
+              Last Revised
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="unit : ${units}">
+          <td>
+            <a th:href="@{neet/submission/{id}(id=${unit.unitId})}">[[${unit.unitName}]]</a>
+          </td>
+          <td th:text="${unit.lastRevised}"></td>
+        </tr>
+        </tbody>
+      </table>
+
     </div>
 </body>
 </html>
