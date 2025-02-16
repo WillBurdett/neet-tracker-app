@@ -26,7 +26,7 @@
         <tbody>
         <tr th:each="unit : ${units}">
           <td>
-            <a th:href="@{neet/submission/leaderboard/{id}(id=${unit.unitId})}">[[${unit.unitName}]]</a>
+            <a th:href="@{neet/problems/{id}(id=${unit.unitId})}">[[${unit.unitName}]]</a>
           </td>
           <td th:text="${unit.lastRevised}"></td>
         </tr>

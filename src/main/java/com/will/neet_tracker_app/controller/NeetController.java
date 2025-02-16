@@ -50,7 +50,7 @@ public class NeetController {
   }
 
   @GetMapping("/submission/leaderboard/{unitId}")
-  public String getUnitLeaderboardL(Model model, @PathVariable Long unitId) {
+  public String getUnitLeaderboard(Model model, @PathVariable Long unitId) {
     UnitEntity unit = unitService.getUnitById(unitId);
     List<SubmissionEntity> submissions = submissionService.getSubmissionsByUnit(unitId);
     model.addAttribute("unitId", unit.getUnitId());
@@ -58,6 +58,23 @@ public class NeetController {
     model.addAttribute("submissions", submissions);
 
     return "leaderboard";
+  }
+
+  @GetMapping("/problems/{unitId}")
+  public String getProblemsByUnitId(Model model, @PathVariable Long unitId) {
+    UnitEntity unit = unitService.getUnitById(unitId);
+    List<ProblemEntity> problemEntities = problemService.getProblemsByUnitId(unitId);
+    model.addAttribute("unitId", unit.getUnitId());
+    model.addAttribute("unitName", unit.getUnitName());
+    model.addAttribute("problemEntities", problemEntities);
+
+    return "problems";
+  }
+
+  @GetMapping("/problems/completed/{problemId}")
+  public String toggleCompletedForGivenProblem(Model model, @PathVariable Long problemId) {
+    ProblemEntity updatedProblemEntity = problemService.toggleCompletedForGivenProblem(problemId);
+    return "redirect:/neet/problems/" + updatedProblemEntity.getUnitEntity().getUnitId();
   }
 
   @GetMapping("/submission/{unitId}")

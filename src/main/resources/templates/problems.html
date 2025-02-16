@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Neet Tracker App</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-2">
+  <h1>Neet Tracker App</h1>
+
+  <hr>
+  <span>
+    <a th:href="@{/neet}" class="btn btn-primary btn-sm mb-3">
+      Home
+    </a>
+    <a th:href="@{/neet/problems/{id}(id=${unitId})}" class="btn btn-primary btn-sm mb-3">
+      Problems
+    </a>
+    <a th:href="@{/neet/submission/leaderboard/{id}(id=${unitId})}" class="btn btn-primary btn-sm mb-3">
+      Leaderboard
+    </a>
+  </span>
+  <h2> [[${unitName}]] Problems</h2>
+
+  <table border="1" class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+      <th>
+        Problem No.
+      </th>
+      <th>
+        Name
+      </th>
+      <th>
+        Completed
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="problem : ${problemEntities}">
+      <td th:text="${problem.problemId}"></td>
+      <td th:text="${problem.problemName}"></td>
+      <td>
+        <a th:href="@{/neet/problems/completed/{id}(id=${problem.problemId})}">
+            <span th:class="${problem.completed} ? 'checkmark green' : 'checkmark'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <path fill="grey"
+                          d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+                </svg>
+            </span>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>
+
+<style>
+  .checkmark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid gray;
+    border-radius: 4px;
+  }
+
+  .green {
+    background-color: lightgreen;
+    border-color: green;
+  }
+</style>

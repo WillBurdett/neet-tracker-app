@@ -14,8 +14,15 @@
 
   <hr>
   <span>
-    <a th:href="@{/neet}" class="btn btn-primary btn-sm mb-3"> Home </a>
-    <a th:href="@{/neet/submission/{id}(id=${unitId})}" class="btn btn-primary btn-sm mb-3"> Submit new time </a>
+    <a th:href="@{/neet}" class="btn btn-primary btn-sm mb-3">
+      Home
+    </a>
+    <a th:href="@{/neet/problems/{id}(id=${unitId})}" class="btn btn-primary btn-sm mb-3">
+      Problems
+    </a>
+    <a th:href="@{/neet/submission/{id}(id=${unitId})}" class="btn btn-primary btn-sm mb-3">
+      Submit new time
+    </a>
   </span>
   <h2> [[${unitName}]] Leaderboard</h2>
 

@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS units (
 CREATE TABLE IF NOT EXISTS problems (
     problem_id INT PRIMARY KEY,
     problem_name VARCHAR(255) NOT NULL,
+    completed BOOLEAN default false,
     unit_id INT NOT NULL,
     CONSTRAINT fk_problem_unit FOREIGN KEY (unit_id) REFERENCES units(unit_id) ON DELETE CASCADE
 );

@@ -24,6 +24,9 @@ public class ProblemEntity {
   @Column(name = "problem_name")
   private String problemName;
 
+  @Column(name = "completed")
+  private boolean completed;
+
   @ManyToOne
   @JoinColumn(name = "unit_id", nullable = false)
   private UnitEntity unitEntity;
