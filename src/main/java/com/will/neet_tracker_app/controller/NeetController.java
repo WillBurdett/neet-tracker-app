@@ -1,5 +1,6 @@
 package com.will.neet_tracker_app.controller;
 
+import com.will.neet_tracker_app.model.api.SubmissionOutput;
 import com.will.neet_tracker_app.model.api.SubmissionForm;
 import com.will.neet_tracker_app.model.db.ProblemEntity;
 import com.will.neet_tracker_app.model.db.SubmissionEntity;
@@ -52,7 +53,7 @@ public class NeetController {
   @GetMapping("/submission/leaderboard/{unitId}")
   public String getUnitLeaderboard(Model model, @PathVariable Long unitId) {
     UnitEntity unit = unitService.getUnitById(unitId);
-    List<SubmissionEntity> submissions = submissionService.getSubmissionsByUnit(unitId);
+    List<SubmissionOutput> submissions = submissionService.getSubmissionsByUnit(unitId);
     model.addAttribute("unitId", unit.getUnitId());
     model.addAttribute("unitName", unit.getUnitName());
     model.addAttribute("submissions", submissions);
