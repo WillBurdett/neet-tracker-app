@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubmissionOutput {
+  private String rank;
   private String timeTaken;
   private LocalDate date;
 }

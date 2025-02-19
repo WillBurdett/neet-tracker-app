@@ -5,7 +5,7 @@ import com.will.neet_tracker_app.model.api.SubmissionForm;
 import com.will.neet_tracker_app.model.db.SubmissionEntity;
 import com.will.neet_tracker_app.model.db.UnitEntity;
 import com.will.neet_tracker_app.repository.SubmissionRepo;
-import com.will.neet_tracker_app.utils.SubmissionConverter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,11 +16,9 @@ import org.springframework.stereotype.Service;
 public class SubmissionService {
 
   private SubmissionRepo submissionRepo;
-  private SubmissionConverter converter;
 
-  public SubmissionService(@Autowired SubmissionRepo submissionRepo, @Autowired SubmissionConverter converter) {
+  public SubmissionService(@Autowired SubmissionRepo submissionRepo) {
     this.submissionRepo = submissionRepo;
-    this.converter = converter;
   }
 
   public List<SubmissionEntity> getSubmissions() {
@@ -39,11 +37,47 @@ public class SubmissionService {
   }
 
   public List<SubmissionOutput> getSubmissionsByUnit(Long unitId) {
-    return submissionRepo.findAll()
+    List<SubmissionEntity> orderedSubmissionEntities = submissionRepo.findAll()
         .stream()
         .filter(u -> u.getUnitEntity().getUnitId() == unitId)
         .sorted(Comparator.comparing(s -> s.getTimeTaken()))
-        .map(v -> converter.convertEntityToOutput(v))
         .collect(Collectors.toList());
+
+    return createRankedSubmissionOutputs(orderedSubmissionEntities);
+
+  }
+
+  public List<SubmissionOutput> createRankedSubmissionOutputs(List<SubmissionEntity> submissionEntities) {
+    List<SubmissionOutput> submissionOutputs = new ArrayList<>();
+    int rank = 1;
+    Long prevTimeTaken = null;
+
+    for (int i = 0; i < submissionEntities.size(); i++) {
+      SubmissionEntity current = submissionEntities.get(i);
+
+      if (prevTimeTaken != null && current.getTimeTaken() != prevTimeTaken) {
+        rank = i + 1;
+      }
+
+      String rankDisplay = (prevTimeTaken != null && current.getTimeTaken().equals(prevTimeTaken)) ? rank + "=" : String.valueOf(rank);
+      submissionOutputs.add(convertEntityToOutput(rankDisplay, current));
+
+      prevTimeTaken = current.getTimeTaken();
+    }
+    return submissionOutputs;
+  }
+
+
+  public SubmissionOutput convertEntityToOutput(String rank, SubmissionEntity submissionEntity) {
+    return new SubmissionOutput(
+        rank,
+        formatTimeTaken(submissionEntity.getTimeTaken()),
+        submissionEntity.getDate());
+  }
+
+  public String formatTimeTaken(Long seconds) {
+    long minutesTaken = seconds / 60;
+    long secondsRemaining = seconds % 60;
+    return String.format("%02d:%02d", minutesTaken, secondsRemaining);
   }
 }

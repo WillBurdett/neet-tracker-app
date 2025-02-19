@@ -41,8 +41,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="submission, stat : ${submissions}">
-      <td th:text="${stat.index + 1}"></td>
+    <tr th:each="submission : ${submissions}">
+      <td th:text="${submission.rank}"></td>
       <td th:text="${submission.timeTaken}"></td>
       <td th:text="${submission.date}"></td>
     </tr>
