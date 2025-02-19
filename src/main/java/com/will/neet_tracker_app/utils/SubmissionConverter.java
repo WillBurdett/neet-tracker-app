@@ -11,7 +11,7 @@ public class SubmissionConverter {
     return new SubmissionOutput(formatTimeTaken(submissionEntity.getTimeTaken()), submissionEntity.getDate());
   }
 
-  private String formatTimeTaken(Long seconds) {
+  public String formatTimeTaken(Long seconds) {
     long minutesTaken = seconds / 60;
     long secondsRemaining = seconds % 60;
     return String.format("%02d:%02d", minutesTaken, secondsRemaining);
